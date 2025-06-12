@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrusel de Imágenes</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #5e8399, #689bac, #90c0d4);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .carousel {
+      position: relative;
+      width: 320px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      background: #fff;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-image {
+      min-width: 100%;
+      height: auto;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 20px;
+    }
+
+    
+    .carousel-image:nth-child(1) {
+      border: 8px solid #a58006dc;
+    }
+
+    .carousel-image:nth-child(2) {
+      border: 8px dashed #d18d28;
+    }
+
+    .carousel-image:nth-child(3) {
+      border: 8px double #0f7a13;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+      border: none;
+      font-size: 2rem;
+      padding: 0.3em 0.7em;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+
+    .carousel-btn:hover {
+      background: #00bcd4;
+      color: white;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="carousel">
+  <div class="carousel-track">
+    <img src="file:///C:/Users/Marlen/Downloads/1ffdfe17-fd0b-4a37-887f-5dd8b42e926f.jpg" alt="Imagen 1" class="carousel-image" />
+    <img src="file:///C:/Users/Marlen/Downloads/2c37e03b-900f-4b5a-bc78-db405398cb8e.jpg" alt="Imagen 2" class="carousel-image" />
+    <img src="file:///C:/Users/Marlen/Downloads/6722b682-552d-405a-aa18-39a8efbf9c8d.jpg" alt="Imagen 3" class="carousel-image" />
+  </div>
+  <button class="carousel-btn prev">⟨</button>
+  <button class="carousel-btn next">⟩</button>
+</div>
+
+<script>
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextBtn = document.querySelector('.next');
+const prevBtn = document.querySelector('.prev');
+
+let currentIndex = 0;
+
+function updateCarousel() {
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+}
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+});
+
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateCarousel();
+});
+</script>
+</body>
+</html>
+
